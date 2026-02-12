@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: https://github.com/gpt14/argocd.git
     targetRevision: main
-    path: appsets/foo
+    path: appsets/foo/dev
   destination:
     name: in-cluster
     namespace: foo
