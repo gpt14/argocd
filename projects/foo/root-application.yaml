@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-application
+spec:
+  project: foo
+  source:
+    repoURL: https://github.com/gpt14/argocd.git
+    targetRevision: main
+    path: appsets/foo
+  destination:
+    name: in-cluster
+    namespace: foo
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
