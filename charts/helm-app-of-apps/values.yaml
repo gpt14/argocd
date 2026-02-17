@@ -1,0 +1,14 @@
+config:
+  spec:
+    project: foo
+    destination:
+      name: in-cluster
+    source:
+      repoURL: https://github.com/gpt14/argocd.git
+      targetRevision: main
+
+applications:
+  - name: ack-controllers
+  - name: sealed-secrets
+    
+
