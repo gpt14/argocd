@@ -6,10 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    chart: helm-app-of-apps
     repoURL: https://github.com/gpt14/argocd.git
     targetRevision: main
     path: charts/helm-app-of-apps
   destination:
     server: "https://kubernetes.default.svc"
     namespace: operators
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
