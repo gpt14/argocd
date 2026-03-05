@@ -29,7 +29,7 @@ spec:
           valueFiles:
           - '$values/workloads/foo-dev/{{.path.basename}}/values.yaml'
       destination:
-        name: foo-dev
+        name: in-cluster
         namespace: '{{.path.basename}}'
       syncPolicy:
         syncOptions:
