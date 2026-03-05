@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: foo-dev-workloads
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+  - git:
+      repoURL: https://github.com/gpt14/argocd.git
+      revision: main
+      directories:
+      - path: workloads/foo-dev/*
+  template:
+    metadata:
+      name: 'foo-dev-{{.path.basename}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "3"
+    spec:
+      project: foo-dev
+      sources:
+      - repoURL: https://github.com/gpt14/argocd.git
+        targetRevision: HEAD
+        ref: values
+      - repoURL: https://github.com/gpt14/argocd.git
+        targetRevision: HEAD
+        path: 'charts/{{.path.basename}}'
+        helm:
+          valueFiles:
+          - '$values/workloads/foo-dev/{{.path.basename}}/values.yaml'
+      destination:
+        name: foo-dev
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true

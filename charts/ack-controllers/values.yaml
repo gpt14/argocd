@@ -1,0 +1,12 @@
+s3-chart:
+  aws:
+    region: us-west-2
+iam-chart:
+  aws:
+    region: us-west-2
+eks-chart:
+  aws:
+    region: us-west-2
+emrcontainers-chart:
+  aws:
+    region: us-west-2
