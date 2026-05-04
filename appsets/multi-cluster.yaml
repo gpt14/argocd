@@ -22,3 +22,9 @@ spec:
       destination:
         server: '{{.server}}'
         namespace: guestbook
+    syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true
